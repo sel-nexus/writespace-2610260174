@@ -95,3 +95,47 @@ export function createPost(input, getSession) {
   const saved = savePosts([...posts.value, post]);
   return saved.ok ? { ok: true, value: post } : saved;
 }
+
+/** Check demo-only ownership; local roles are not a security boundary. */
+export function canMutatePost(session, post) {
+  const present = (value) => typeof value === 'string' && value.trim().length > 0;
+  return Boolean(session && present(session.userId) && present(session.username)
+    && present(session.displayName) && ['user', 'admin'].includes(session.role)
+    && validPost(post) && (session.role === 'admin' || post.authorId === session.userId));
+}
+
+/** Read the current identity and collection before authorizing a mutation. */
+function mutationTarget(id, getSession) {
+  const session = typeof getSession === 'function' ? getSession() : null;
+  if (!session || typeof session.userId !== 'string' || !session.userId.trim()
+    || typeof session.username !== 'string' || !session.username.trim()
+    || typeof session.displayName !== 'string' || !session.displayName.trim()
+    || !['user', 'admin'].includes(session.role)) return { ok: false, code: 'UNAUTHENTICATED' };
+  const posts = readPosts();
+  if (!posts.ok) return posts;
+  const post = posts.value.find((item) => item.id === id);
+  if (!post) return { ok: false, code: 'NOT_FOUND' };
+  if (!canMutatePost(session, post)) return { ok: false, code: 'FORBIDDEN' };
+  return { ok: true, value: { post, posts: posts.value } };
+}
+
+/** Persist only editable fields of an authorized current post. */
+export function updatePost(input, getSession) {
+  const fields = ['title', 'content'].filter((key) => typeof input?.[key] !== 'string' || !input[key].trim());
+  if (fields.length) return { ok: false, code: 'VALIDATION', fields };
+  const target = mutationTarget(input.id, getSession);
+  if (!target.ok) return target;
+  const updated = { ...target.value.post, title: input.title, content: input.content };
+  const saved = savePosts(target.value.posts.map((post) => post.id === input.id ? updated : post));
+  return saved.ok ? { ok: true, value: updated } : saved;
+}
+
+/** Confirm and reauthorize deletion against freshly read local data. */
+export function deletePost(input, getSession, confirm = (message) => window.confirm(message)) {
+  const target = mutationTarget(input?.id, getSession);
+  if (!target.ok) return target;
+  if (!confirm('Delete this post?')) return { ok: false, code: 'CANCELLED' };
+  const current = mutationTarget(input?.id, getSession);
+  if (!current.ok) return current;
+  return savePosts(current.value.posts.filter((post) => post.id !== input.id));
+}

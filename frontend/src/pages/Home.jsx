@@ -9,7 +9,7 @@ function snapshot() {
   return { posts: readPosts(), users: getUsers() };
 }
 
-export default function Home() {
+export default function Home({ session }) {
   const [data, setData] = useState(snapshot);
   useEffect(() => {
     const update = (event) => {
@@ -33,7 +33,7 @@ export default function Home() {
           <p className="mt-10 text-slate-600">No blogs yet. Be the first to write one!</p>
         ) : (
           <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {posts.map((post, index) => <BlogCard key={post.id} post={post} index={index} role={authorRole(post.authorId, data.users)} />)}
+            {posts.map((post, index) => <BlogCard key={post.id} post={post} index={index} role={authorRole(post.authorId, data.users)} session={session} />)}
           </div>
         )}
       </div>

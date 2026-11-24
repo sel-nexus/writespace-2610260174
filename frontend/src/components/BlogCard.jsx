@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Avatar } from './Avatar';
 import { DEFAULT_ADMIN_ID } from '../utils/auth';
+import { canMutatePost } from '../utils/storage';
 
 /** Resolve a role only when the current account data supports it. */
 export function authorRole(authorId, users) {
@@ -16,7 +17,7 @@ export function postDate(value) {
   return new Date(value).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
 }
 
-export function BlogCard({ post, index, role }) {
+export function BlogCard({ post, index, role, session }) {
   const borders = ['border-indigo-500', 'border-violet-500', 'border-pink-500', 'border-teal-500'];
   return (
     <article className={`rounded-xl border border-slate-200 border-t-4 ${borders[index % borders.length]} bg-white p-6`}>
@@ -29,7 +30,10 @@ export function BlogCard({ post, index, role }) {
         <Avatar role={role} />
         <span>{post.authorName}</span>
       </div>
+      {canMutatePost(session, post) && (
+        <Link to={`/edit/${encodeURIComponent(post.id)}`} aria-label={`Edit ${post.title}`} className="mt-4 inline-block font-semibold text-indigo-700 underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-indigo-700">Edit</Link>
+      )}
     </article>
   );
 }
-BlogCard.propTypes = { post: PropTypes.object.isRequired, index: PropTypes.number.isRequired, role: PropTypes.string };
+BlogCard.propTypes = { post: PropTypes.object.isRequired, index: PropTypes.number.isRequired, role: PropTypes.string, session: PropTypes.object };

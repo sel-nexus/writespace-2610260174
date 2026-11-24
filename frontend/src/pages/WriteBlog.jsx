@@ -1,19 +1,29 @@
 /** Provide a controlled form that saves only after validation and persistence. */
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
 import { getSession } from '../utils/auth';
-import { createPost } from '../utils/storage';
+import { canMutatePost, createPost, readPosts, updatePost } from '../utils/storage';
 
 export default function WriteBlog() {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+  const { id } = useParams();
+  const editing = id !== undefined;
+  const [initial] = useState(() => {
+    if (!editing) return { status: 'create' };
+    const posts = readPosts();
+    if (!posts.ok) return { status: 'error' };
+    const post = posts.value.find((item) => item.id === id);
+    if (!post) return { status: 'missing' };
+    return canMutatePost(getSession(), post) ? { status: 'edit', post } : { status: 'forbidden' };
+  });
+  const [title, setTitle] = useState(initial.post?.title || '');
+  const [content, setContent] = useState(initial.post?.content || '');
   const [fields, setFields] = useState([]);
   const [error, setError] = useState('');
   const navigate = useNavigate();
   /** Preserve the draft unless the complete post is persisted. */
   function handleSubmit(event) {
     event.preventDefault();
-    const result = createPost({ title, content }, getSession);
+    const result = editing ? updatePost({ id, title, content }, getSession) : createPost({ title, content }, getSession);
     if (!result.ok) {
       setFields(result.fields || []);
       setError(result.code === 'VALIDATION' ? '' : result.code === 'UNAUTHENTICATED'
@@ -23,10 +33,17 @@ export default function WriteBlog() {
     }
     navigate(`/blog/${encodeURIComponent(result.value.id)}`);
   }
+  if (initial.status === 'forbidden') return <Navigate to="/blogs" replace />;
+  if (initial.status === 'missing' || initial.status === 'error') return (
+    <main className="mx-auto max-w-3xl px-5 py-14">
+      {initial.status === 'missing' ? <h1 className="font-serif text-4xl">Post not found</h1> : <p role="alert" className="text-red-800">Posts could not be read from local storage.</p>}
+      <Link to="/blogs" className="mt-6 inline-block font-semibold text-indigo-700 underline">Back to All Posts</Link>
+    </main>
+  );
   return (
     <main className="mx-auto max-w-3xl px-5 py-14">
       <p className="text-xs font-bold uppercase tracking-[0.2em] text-indigo-700">Make space for an idea</p>
-      <h1 className="mt-3 font-serif text-4xl">Write a post</h1>
+      <h1 className="mt-3 font-serif text-4xl">{editing ? 'Edit post' : 'Write a post'}</h1>
       <form className="mt-10 space-y-6" onSubmit={handleSubmit} noValidate>
         {error && <p role="alert" className="rounded-lg bg-red-50 p-4 text-red-800">{error}</p>}
         <div>

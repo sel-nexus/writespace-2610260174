@@ -59,10 +59,10 @@ export default function App() {
         <Route path="/" element={<LandingPage session={session} />} />
         <Route path="/login" element={authPage(<LoginPage onSessionChange={acceptSession} />)} />
         <Route path="/register" element={authPage(<RegisterPage onSessionChange={acceptSession} />)} />
-        <Route path="/blogs" element={protectedPage(<Home />)} />
-        <Route path="/blog/:id" element={protectedPage(<ReadBlog />)} />
-        <Route path="/write" element={protectedPage(<WriteBlog />)} />
-        <Route path="/edit/:id" element={protectedPage(<Unavailable />)} />
+        <Route path="/blogs" element={protectedPage(<Home session={session} />)} />
+        <Route path="/blog/:id" element={protectedPage(<ReadBlog session={session} />)} />
+        <Route path="/write" element={protectedPage(<WriteBlog key={location.pathname} />)} />
+        <Route path="/edit/:id" element={protectedPage(<WriteBlog key={location.pathname} />)} />
         <Route path="/admin" element={protectedPage(<Unavailable />, true)} />
         <Route path="/users" element={protectedPage(<Unavailable />, true)} />
         <Route path="*" element={<Unavailable />} />
