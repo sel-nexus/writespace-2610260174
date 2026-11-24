@@ -11,6 +11,7 @@ import { ProtectedRoute } from './components/ProtectedRoute';
 
 const input = { displayName: 'Lee', username: 'lee', password: 'demo', confirmPassword: 'demo' };
 const userSession = { userId: 'u1', username: 'lee', displayName: 'Lee', role: 'user' };
+const storedUser = { id: 'u1', username: 'existing', displayName: 'Existing', password: 'secret', role: 'user', createdAt: '2024-01-01T00:00:00.000Z' };
 
 beforeEach(() => { localStorage.clear(); });
 afterEach(() => { cleanup(); vi.restoreAllMocks(); });
@@ -20,6 +21,69 @@ function mount(path = '/') {
 }
 
 describe('storage and identity contracts', () => {
+  it.each([null, undefined])('rejects a missing registration input (%s)', (value) => {
+    expect(register(value)).toEqual({ ok: false, code: 'VALIDATION', fields: ['displayName', 'username', 'password', 'confirmPassword'] });
+    expect(localStorage.getItem(USERS_KEY)).toBeNull();
+  });
+  it.each(['displayName', 'username', 'password', 'confirmPassword'].flatMap((field) => [
+    [field, undefined], [field, null], [field, 42], [field, {}], [field, '  '],
+  ]))('rejects registration with invalid %s (%s)', (field, value) => {
+    expect(register({ ...input, [field]: value })).toMatchObject({ ok: false, code: 'VALIDATION', fields: [field] });
+    expect(localStorage.getItem(USERS_KEY)).toBeNull();
+    expect(localStorage.getItem(SESSION_KEY)).toBeNull();
+  });
+  it.each(['userId', 'username', 'displayName', 'role'].flatMap((field) => [
+    [field, undefined], [field, null], [field, 42], [field, {}], [field, '  '],
+  ]))('rejects session with invalid %s (%s) on read and write', (field, value) => {
+    const invalid = { ...userSession, [field]: value };
+    expect(setSession(invalid)).toMatchObject({ ok: false, code: 'VALIDATION' });
+    expect(localStorage.getItem(SESSION_KEY)).toBeNull();
+    localStorage.setItem(SESSION_KEY, JSON.stringify(invalid));
+    expect(getSession()).toBeNull();
+  });
+  it.each([
+    ['invalid date', [{ ...storedUser, createdAt: 'not a date' }]],
+    ['duplicate id', [storedUser, { ...storedUser, username: 'other' }]],
+    ['duplicate username', [storedUser, { ...storedUser, id: 'u2' }]],
+    ['reserved id', [{ ...storedUser, id: 'default-admin' }]],
+    ['reserved username', [{ ...storedUser, username: 'admin' }]],
+    ['invalid record', [storedUser, null]],
+  ])('does not rewrite %s account data during registration', (_name, records) => {
+    const raw = JSON.stringify(records);
+    localStorage.setItem(USERS_KEY, raw);
+    expect(register(input)).toEqual({ ok: false, code: 'STORAGE_READ_FAILED' });
+    expect(localStorage.getItem(USERS_KEY)).toBe(raw);
+    expect(localStorage.getItem(SESSION_KEY)).toBeNull();
+  });
+  it.each(['id', 'displayName', 'username', 'password', 'role', 'createdAt'].flatMap((field) => [
+    [field, undefined], [field, 42],
+  ]))('preserves stored account with invalid %s (%s)', (field, value) => {
+    const raw = JSON.stringify([{ ...storedUser, [field]: value }]);
+    localStorage.setItem(USERS_KEY, raw);
+    expect(register(input).code).toBe('STORAGE_READ_FAILED');
+    expect(localStorage.getItem(USERS_KEY)).toBe(raw);
+  });
+  it.each([['collision', 'u1'], ['reserved id', 'default-admin'], ['blank id', '  '], ['non-string id', 42]])('rejects generated %s without writes', (_name, id) => {
+    const raw = JSON.stringify([storedUser]);
+    localStorage.setItem(USERS_KEY, raw);
+    vi.spyOn(crypto, 'randomUUID').mockReturnValue(id);
+    expect(register(input)).toEqual({ ok: false, code: 'STORAGE_WRITE_FAILED' });
+    expect(localStorage.getItem(USERS_KEY)).toBe(raw);
+    expect(localStorage.getItem(SESSION_KEY)).toBeNull();
+  });
+  it('preserves accounts if UUID generation throws', () => {
+    const raw = JSON.stringify([storedUser]);
+    localStorage.setItem(USERS_KEY, raw);
+    vi.spyOn(crypto, 'randomUUID').mockImplementation(() => { throw Error('unavailable'); });
+    expect(register(input).code).toBe('STORAGE_WRITE_FAILED');
+    expect(localStorage.getItem(USERS_KEY)).toBe(raw);
+    expect(localStorage.getItem(SESSION_KEY)).toBeNull();
+  });
+  it('keeps exact built-in credentials authoritative even with a stored admin impersonator', () => {
+    localStorage.setItem(USERS_KEY, JSON.stringify([{ ...storedUser, username: 'admin', password: 'secret', role: 'user' }]));
+    expect(login({ username: 'admin', password: 'admin' }).value).toEqual({ userId: 'default-admin', username: 'admin', displayName: 'Admin', role: 'admin' });
+    expect(login({ username: 'admin', password: 'secret' }).code).toBe('INVALID_CREDENTIALS');
+  });
   it('reads missing, corrupt and non-array collections without rewriting them', () => {
     expect(getPosts()).toEqual([]);
     expect(readCollection(USERS_KEY)).toEqual({ ok: true, value: [] });
@@ -98,6 +162,40 @@ describe('storage and identity contracts', () => {
 });
 
 describe('pages and routing', () => {
+  it.each(['partial', 'read', 'write'])('discloses registration %s failure without navigating', async (failure) => {
+    const raw = failure === 'read' ? '[null]' : null;
+    if (raw) localStorage.setItem(USERS_KEY, raw);
+    mount('/register');
+    const user = userEvent.setup();
+    await user.type(screen.getByLabelText('Display Name'), 'Lee');
+    await user.type(screen.getByLabelText('Username'), 'lee');
+    await user.type(screen.getByLabelText('Password', { exact: true }), 'demo');
+    await user.type(screen.getByLabelText('Confirm Password'), 'demo');
+    const original = Storage.prototype.setItem;
+    if (failure !== 'read') vi.spyOn(Storage.prototype, 'setItem').mockImplementation(function (key, value) {
+      if (key === (failure === 'partial' ? SESSION_KEY : USERS_KEY)) throw Error('quota');
+      return original.call(this, key, value);
+    });
+    await user.click(screen.getByRole('button', { name: 'Register' }));
+    expect(screen.getByRole('heading', { name: 'Create your space' })).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'All Blogs' })).not.toBeInTheDocument();
+    expect(screen.getByRole('alert')).toHaveTextContent(failure === 'partial' ? 'Your account was saved, but signing in failed. Please use Login' : failure === 'read' ? 'No account was created' : 'Could not save to local storage');
+    expect(screen.getByLabelText('Username')).toHaveValue('lee');
+    expect(getSession()).toBeNull();
+    if (failure === 'partial') expect(getUsers()).toMatchObject([{ username: 'lee', password: 'demo' }]);
+    else expect(localStorage.getItem(USERS_KEY)).toBe(raw);
+  });
+  it('reports login session write failure without navigating', async () => {
+    mount('/login');
+    const user = userEvent.setup();
+    await user.type(screen.getByLabelText('Username'), 'admin');
+    await user.type(screen.getByLabelText('Password'), 'admin');
+    vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => { throw Error('quota'); });
+    await user.click(screen.getByRole('button', { name: 'Login' }));
+    expect(screen.getByRole('alert')).toHaveTextContent('Could not save to local storage');
+    expect(screen.getByRole('heading', { name: 'Welcome back' })).toBeInTheDocument();
+    expect(getSession()).toBeNull();
+  });
   it('shows guest landing and newest valid three previews', () => {
     savePosts([1, ...[1, 2, 3, 4].map((n) => ({ id: String(n), title: `Story ${n}`, content: `Text ${n}`, createdAt: `2024-01-0${n}T00:00:00Z` }))]);
     mount();

@@ -44,6 +44,29 @@ describe('admin account operations', () => {
     expect(createUser({ ...input, username: 'lee' }, getSession).reason).toBe('USERNAME_TAKEN');
     expect(createUser({ ...input, username: 'Lee' }, getSession).ok).toBe(true);
   });
+  it.each(['displayName', 'username', 'password', 'role'])('rejects a missing %s without changing users', (field) => {
+    const invalid = { ...input };
+    delete invalid[field];
+    const before = localStorage.getItem(USERS_KEY);
+    expect(createUser(invalid, getSession)).toEqual({ ok: false, code: 'VALIDATION', fields: [field] });
+    expect(localStorage.getItem(USERS_KEY)).toBe(before);
+    expect(stored()).toEqual([account, otherAdmin]);
+  });
+  it.each(['displayName', 'username', 'password', 'role'].flatMap((field) => [
+    [field, 'null', null], [field, 'number', 123], [field, 'boolean', false], [field, 'object', {}], [field, 'array', []],
+  ]))('rejects %s with invalid %s type without changing users', (field, _type, value) => {
+    const before = localStorage.getItem(USERS_KEY);
+    expect(createUser({ ...input, [field]: value }, getSession)).toEqual({ ok: false, code: 'VALIDATION', fields: [field] });
+    expect(localStorage.getItem(USERS_KEY)).toBe(before);
+    expect(stored()).toEqual([account, otherAdmin]);
+  });
+  it('persists large valid account fields without imposing a size limit', () => {
+    const largeInput = { ...input, displayName: 'D'.repeat(10000), username: 'u'.repeat(10000), password: 'p'.repeat(10000) };
+    const result = createUser(largeInput, getSession);
+    expect(result.ok).toBe(true);
+    expect(result.value).toMatchObject(largeInput);
+    expect(stored()).toEqual([account, otherAdmin, result.value]);
+  });
   it('rejects UUID collisions including the permanent admin id', () => {
     const uuid = vi.spyOn(crypto, 'randomUUID').mockReturnValue('u1');
     expect(createUser(input, getSession).code).toBe('STORAGE_WRITE_FAILED');

@@ -19,6 +19,29 @@ function mount(path) {
 }
 
 describe('safe creation', () => {
+  it.each(['title', 'content'].flatMap((field) => [[field, undefined], [field, null], [field, 123], [field, {}], [field, '  ']]))('rejects invalid post %s (%s)', (field, value) => {
+    setSession(session);
+    expect(createPost({ title: 'Title', content: 'Content', [field]: value }, getSession)).toEqual({ ok: false, code: 'VALIDATION', fields: [field] });
+    expect(localStorage.getItem(POSTS_KEY)).toBeNull();
+  });
+  it.each(['id', 'title', 'content', 'authorId', 'authorName', 'createdAt'].flatMap((field) => [[field, undefined], [field, 7]]))('preserves stored post with invalid %s (%s)', (field, value) => {
+    setSession(session);
+    const raw = JSON.stringify([{ ...post, [field]: value }]);
+    localStorage.setItem(POSTS_KEY, raw);
+    expect(createPost({ title: 'New', content: 'Text' }, getSession).code).toBe('STORAGE_READ_FAILED');
+    expect(localStorage.getItem(POSTS_KEY)).toBe(raw);
+  });
+  it('saves large plaintext exactly and retains existing posts when quota fails', () => {
+    setSession(session);
+    const content = '<script>text</script>\n  '.repeat(5000);
+    const saved = createPost({ title: 'Large', content }, getSession);
+    expect(saved.ok).toBe(true);
+    expect(JSON.parse(localStorage.getItem(POSTS_KEY))[0].content).toBe(content);
+    const raw = localStorage.getItem(POSTS_KEY);
+    vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => { throw new DOMException('Quota exceeded', 'QuotaExceededError'); });
+    expect(createPost({ title: 'Another', content }, getSession).code).toBe('STORAGE_WRITE_FAILED');
+    expect(localStorage.getItem(POSTS_KEY)).toBe(raw);
+  });
   it('saves input and snapshots the fresh identity, UUID and ISO date', () => {
     setSession(session);
     vi.spyOn(crypto, 'randomUUID').mockReturnValue('new-id');
@@ -62,6 +85,18 @@ describe('safe creation', () => {
 });
 
 describe('post pages', () => {
+  it('keeps the draft and stays on the editor when a post collection cannot be read', async () => {
+    setSession(session); localStorage.setItem(POSTS_KEY, '[null]'); mount('/write');
+    const user = userEvent.setup();
+    await user.type(screen.getByLabelText('Title'), 'Draft title');
+    await user.type(screen.getByLabelText('Content'), 'Draft content');
+    await user.click(screen.getByRole('button', { name: 'Save' }));
+    expect(screen.getByRole('alert')).toHaveTextContent('draft is still here');
+    expect(screen.getByRole('heading', { name: 'Write a post' })).toBeInTheDocument();
+    expect(screen.getByLabelText('Title')).toHaveValue('Draft title');
+    expect(screen.getByLabelText('Content')).toHaveValue('Draft content');
+    expect(localStorage.getItem(POSTS_KEY)).toBe('[null]');
+  });
   it('guards guests and keeps admin placeholders guarded', () => {
     mount('/write');
     expect(screen.getByRole('heading', { name: 'Welcome back' })).toBeInTheDocument();

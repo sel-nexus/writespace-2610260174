@@ -1,6 +1,6 @@
-# WriteSpace — identity preview
+# WriteSpace
 
-WriteSpace is a standalone React/Vite browser-local demo. This slice provides a public landing page, up to three latest local post previews, registration, login, logout, navigation and route guards. Blog reading/writing and administration are not yet implemented; their guarded destinations show an explicit unavailable message until later slices replace them.
+WriteSpace is a standalone React/Vite browser-local blogging demo with a public landing page, local registration and login, post reading and ownership-aware editing, and an admin dashboard with local account management.
 
 ## Safety and data
 
@@ -22,8 +22,8 @@ Open the URL printed by Vite. A secure context such as localhost is needed for `
 
 ## Tests
 
-From `frontend`, run `node node_modules/vitest/vitest.mjs run src/identity.test.jsx`. Playwright uses exactly 1.64.1 and the full Chromium channel. After installing the matching browser if needed, discover tests with `node node_modules/@playwright/test/cli.js test --list` and run `node node_modules/@playwright/test/cli.js test`. The config starts its own local Vite server on port 4173. Browser tests and deployed-origin checks are separate from the unit suite; no hosted behavior is implied by a local build.
+From `frontend`, run `node node_modules/vitest/vitest.mjs run` for the full unit and component suite. Playwright uses exactly 1.64.1 and the full Chromium channel. After installing the matching browser if needed, discover tests with `node node_modules/@playwright/test/cli.js test --list` and run `node node_modules/@playwright/test/cli.js test`. The config starts its own local Vite server on port 4173. Browser tests and deployed-origin checks are separate from the unit suite; no hosted behavior is implied by a local build.
 
 ## Structure and constraints
 
-`src/utils` contains status-aware storage and demo identity operations. `App.jsx` owns the session and cross-tab storage listener. Pages and components contain the public and identity interface. Later slices may add post and admin functionality to the guarded routes. The approved future account policy retains posts and author-name snapshots on account deletion; future account counts include the permanent admin in total users and total admins, while the regular-user count excludes admins. An em dash represents its unknown creation date and unknown author roles use a neutral avatar. Performance acceptance and deployed-origin rewrites require downstream verification.
+`src/utils` contains status-aware storage and demo identity operations. `App.jsx` owns the session and cross-tab storage listener. Pages and components implement public, authoring and admin workflows. Account deletion retains posts and author-name snapshots; total user and admin counts include the permanent admin, while the regular-user count excludes admins. An em dash represents its unknown creation date and unknown author roles use a neutral avatar. Performance acceptance and deployed-origin rewrites require downstream verification. The v6 React Router dependency has two moderate npm audit advisories; upgrading to v7 requires a separate architecture decision.

@@ -1,5 +1,5 @@
 /** Local demonstration identity: these client-side roles are not security. */
-import { getUsers, readCollection, saveUsers, SESSION_KEY, USERS_KEY, writeValue } from './storage';
+import { getUsers, readUsers, saveUsers, SESSION_KEY, writeValue } from './storage';
 
 export const DEFAULT_ADMIN_ID = 'default-admin';
 const admin = { userId: DEFAULT_ADMIN_ID, username: 'admin', displayName: 'Admin', role: 'admin' };
@@ -62,17 +62,17 @@ export function login({ username, password }) {
 
 /** Create a local user, then persist its session; disclose partial success. */
 export function register(input) {
-  const fields = ['displayName', 'username', 'password', 'confirmPassword'].filter((name) => !present(input[name]));
-  if (present(input.password) && present(input.confirmPassword) && input.password !== input.confirmPassword) fields.push('confirmPassword');
+  const fields = ['displayName', 'username', 'password', 'confirmPassword'].filter((name) => !present(input?.[name]));
+  if (present(input?.password) && present(input?.confirmPassword) && input.password !== input.confirmPassword) fields.push('confirmPassword');
   if (fields.length) return { ok: false, code: 'VALIDATION', fields };
-  const users = readCollection(USERS_KEY);
-  if (!users.ok || !users.value.every(validUser)) return { ok: false, code: 'STORAGE_READ_FAILED' };
+  const users = readUsers();
+  if (!users.ok) return users;
   if (input.username === 'admin' || users.value.some((user) => user.username === input.username)) {
     return { ok: false, code: 'VALIDATION', fields: ['username'], reason: 'USERNAME_TAKEN' };
   }
   let id;
   try { id = crypto.randomUUID(); } catch { return { ok: false, code: 'STORAGE_WRITE_FAILED' }; }
-  if (users.value.some((user) => user.id === id)) return { ok: false, code: 'STORAGE_WRITE_FAILED' };
+  if (!present(id) || id === DEFAULT_ADMIN_ID || users.value.some((user) => user.id === id)) return { ok: false, code: 'STORAGE_WRITE_FAILED' };
   const user = { id, displayName: input.displayName, username: input.username, password: input.password, role: 'user', createdAt: new Date().toISOString() };
   const saved = saveUsers([...users.value, user]);
   if (!saved.ok) return saved;

@@ -43,6 +43,29 @@ describe('post mutation contracts', () => {
     expect(updatePost(input, getSession).code).toBe('UNAUTHENTICATED');
     expect(stored()).toEqual([post, another]);
   });
+  it.each(['title', 'content'])('rejects a missing %s without changing posts', (field) => {
+    const invalid = { ...input };
+    delete invalid[field];
+    const before = localStorage.getItem(POSTS_KEY);
+    expect(updatePost(invalid, getSession)).toEqual({ ok: false, code: 'VALIDATION', fields: [field] });
+    expect(localStorage.getItem(POSTS_KEY)).toBe(before);
+    expect(stored()).toEqual([post, another]);
+  });
+  it.each(['title', 'content'].flatMap((field) => [
+    [field, 'null', null], [field, 'number', 123], [field, 'boolean', false], [field, 'object', {}], [field, 'array', []],
+  ]))('rejects %s with invalid %s type without changing posts', (field, _type, value) => {
+    const before = localStorage.getItem(POSTS_KEY);
+    expect(updatePost({ ...input, [field]: value }, getSession)).toEqual({ ok: false, code: 'VALIDATION', fields: [field] });
+    expect(localStorage.getItem(POSTS_KEY)).toBe(before);
+    expect(stored()).toEqual([post, another]);
+  });
+  it('persists large valid editable fields without imposing a size limit', () => {
+    const title = 'T'.repeat(10000);
+    const content = 'Body '.repeat(10000);
+    const updated = { ...post, title, content };
+    expect(updatePost({ ...input, title, content }, getSession)).toEqual({ ok: true, value: updated });
+    expect(stored()).toEqual([updated, another]);
+  });
   it.each(['{broken', '{}', '[null]', JSON.stringify([post, post])])('does not overwrite unsafe collection %s', (raw) => {
     localStorage.setItem(POSTS_KEY, raw);
     expect(updatePost(input, getSession).code).toBe('STORAGE_READ_FAILED');

@@ -21,7 +21,9 @@ function Unavailable() {
     <main className="mx-auto max-w-6xl px-5 py-20">
       <h1 className="font-serif text-3xl text-slate-900">Page not available</h1>
       <p className="mt-4 text-slate-600">This part of WriteSpace is not included in this identity preview.</p>
-      <Link to="/" className="mt-6 inline-block font-semibold text-indigo-700 underline">Return home</Link>
+      <Link to="/" className="mt-6 inline-block font-semibold text-indigo-700 underline">
+        Return home
+      </Link>
     </main>
   );
 }
@@ -33,7 +35,9 @@ export default function App() {
   const location = useLocation();
   const navigate = useNavigate();
   useEffect(() => {
-    const update = (event) => { if (event.key === SESSION_KEY || event.key === null) setSession(getSession()); };
+    const update = (event) => {
+      if (event.key === SESSION_KEY || event.key === null) setSession(getSession());
+    };
     window.addEventListener('storage', update);
     return () => window.removeEventListener('storage', update);
   }, []);
@@ -43,20 +47,37 @@ export default function App() {
   /** Keep the current session visible if the storage removal fails. */
   function handleLogout() {
     const result = logout();
-    if (!result.ok) { setError('Could not sign out: local storage removal failed. Please try again.'); return; }
+    if (!result.ok) {
+      setError('Could not sign out: local storage removal failed. Please try again.');
+      return;
+    }
     setError('');
     setSignedOut(true);
     setSession(null);
     navigate('/');
   }
   const publicNav = location.pathname === '/' || !session;
-  const authPage = (page) => session ? <Navigate to={roleHome(session)} replace /> : page;
-  const protectedPage = (page, adminOnly = false) => signedOut && !session ? <Navigate to="/" replace /> : <ProtectedRoute session={session} adminOnly={adminOnly}>{page}</ProtectedRoute>;
-  const acceptSession = (value) => { setSignedOut(false); setSession(value); };
+  const authPage = (page) => (session ? <Navigate to={roleHome(session)} replace /> : page);
+  const protectedPage = (page, adminOnly = false) =>
+    signedOut && !session ? (
+      <Navigate to="/" replace />
+    ) : (
+      <ProtectedRoute session={session} adminOnly={adminOnly}>
+        {page}
+      </ProtectedRoute>
+    );
+  const acceptSession = (value) => {
+    setSignedOut(false);
+    setSession(value);
+  };
   return (
     <div className="min-h-screen bg-white text-slate-900">
       {publicNav ? <PublicNavbar session={session} /> : <Navbar session={session} onLogout={handleLogout} />}
-      {error && <p role="alert" className="mx-auto max-w-6xl bg-red-50 px-5 py-3 text-red-800">{error}</p>}
+      {error && (
+        <p role="alert" className="mx-auto max-w-6xl bg-red-50 px-5 py-3 text-red-800">
+          {error}
+        </p>
+      )}
       <Routes>
         <Route path="/" element={<LandingPage session={session} />} />
         <Route path="/login" element={authPage(<LoginPage onSessionChange={acceptSession} />)} />
