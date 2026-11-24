@@ -139,3 +139,86 @@ export function deletePost(input, getSession, confirm = (message) => window.conf
   if (!current.ok) return current;
   return savePosts(current.value.posts.filter((post) => post.id !== input.id));
 }
+
+/** Validate an account before retaining it in a rewritten collection. */
+export function validUser(user) {
+  const present = (value) => typeof value === 'string' && value.trim().length > 0;
+  return Boolean(user && typeof user === 'object' && !Array.isArray(user)
+    && present(user.id) && user.id !== 'default-admin' && present(user.displayName)
+    && present(user.username) && user.username !== 'admin' && present(user.password)
+    && ['admin', 'user'].includes(user.role) && present(user.createdAt)
+    && Number.isFinite(Date.parse(user.createdAt)));
+}
+
+/** Read accounts only when every record and its unique identifiers are safe. */
+export function readUsers() {
+  const result = readCollection(USERS_KEY);
+  if (!result.ok) return result;
+  const ids = new Set();
+  const names = new Set();
+  for (const user of result.value) {
+    if (!validUser(user) || ids.has(user.id) || names.has(user.username)) return { ok: false, code: 'STORAGE_READ_FAILED' };
+    ids.add(user.id);
+    names.add(user.username);
+  }
+  return result;
+}
+
+/** Require a freshly read, complete local admin identity; this is not security. */
+function adminSession(getSession) {
+  const session = typeof getSession === 'function' ? getSession() : null;
+  const present = (value) => typeof value === 'string' && value.trim().length > 0;
+  if (!session || !present(session.userId) || !present(session.username) || !present(session.displayName)
+    || !['admin', 'user'].includes(session.role)) return { ok: false, code: 'UNAUTHENTICATED' };
+  if (session.role !== 'admin') return { ok: false, code: 'FORBIDDEN' };
+  return { ok: true, value: session };
+}
+
+/** Create a local account without changing the active session. */
+export function createUser(input, getSession) {
+  const session = adminSession(getSession);
+  if (!session.ok) return session;
+  const fields = ['displayName', 'username', 'password'].filter((key) => typeof input?.[key] !== 'string' || !input[key].trim());
+  if (!['user', 'admin'].includes(input?.role)) fields.push('role');
+  if (fields.length) return { ok: false, code: 'VALIDATION', fields };
+  const users = readUsers();
+  if (!users.ok) return users;
+  if (input.username === 'admin' || users.value.some((user) => user.username === input.username)) {
+    return { ok: false, code: 'VALIDATION', fields: ['username'], reason: 'USERNAME_TAKEN' };
+  }
+  let id;
+  let createdAt;
+  try {
+    id = crypto.randomUUID();
+    createdAt = new Date().toISOString();
+  } catch {
+    return { ok: false, code: 'STORAGE_WRITE_FAILED' };
+  }
+  if (typeof id !== 'string' || !id.trim() || id === 'default-admin' || users.value.some((user) => user.id === id)) {
+    return { ok: false, code: 'STORAGE_WRITE_FAILED' };
+  }
+  const user = { id, displayName: input.displayName, username: input.username, password: input.password, role: input.role, createdAt };
+  const saved = saveUsers([...users.value, user]);
+  return saved.ok ? { ok: true, value: user } : saved;
+}
+
+/** Recheck the admin, protected identities and current account collection. */
+function userDeletionTarget(id, getSession) {
+  const session = adminSession(getSession);
+  if (!session.ok) return session;
+  if (id === 'default-admin' || id === session.value.userId) return { ok: false, code: 'FORBIDDEN' };
+  const users = readUsers();
+  if (!users.ok) return users;
+  if (!users.value.some((user) => user.id === id)) return { ok: false, code: 'NOT_FOUND' };
+  return users;
+}
+
+/** Confirm deletion and retain posts unchanged with one account-key write. */
+export function deleteUser(input, getSession, confirm = (message) => window.confirm(message)) {
+  const target = userDeletionTarget(input?.id, getSession);
+  if (!target.ok) return target;
+  if (!confirm('Delete this account? Its posts will remain.')) return { ok: false, code: 'CANCELLED' };
+  const current = userDeletionTarget(input?.id, getSession);
+  if (!current.ok) return current;
+  return saveUsers(current.value.filter((user) => user.id !== input.id));
+}

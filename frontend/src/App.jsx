@@ -10,6 +10,8 @@ import RegisterPage from './pages/RegisterPage';
 import Home from './pages/Home';
 import ReadBlog from './pages/ReadBlog';
 import WriteBlog from './pages/WriteBlog';
+import AdminDashboard from './pages/AdminDashboard';
+import UserManagement from './pages/UserManagement';
 import { getSession, logout, roleHome } from './utils/auth';
 import { SESSION_KEY } from './utils/storage';
 
@@ -63,8 +65,8 @@ export default function App() {
         <Route path="/blog/:id" element={protectedPage(<ReadBlog session={session} />)} />
         <Route path="/write" element={protectedPage(<WriteBlog key={location.pathname} />)} />
         <Route path="/edit/:id" element={protectedPage(<WriteBlog key={location.pathname} />)} />
-        <Route path="/admin" element={protectedPage(<Unavailable />, true)} />
-        <Route path="/users" element={protectedPage(<Unavailable />, true)} />
+        <Route path="/admin" element={protectedPage(<AdminDashboard />, true)} />
+        <Route path="/users" element={protectedPage(<UserManagement session={session} />, true)} />
         <Route path="*" element={<Unavailable />} />
       </Routes>
     </div>

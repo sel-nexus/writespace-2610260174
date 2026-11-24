@@ -19,6 +19,63 @@
       "community": 0
     },
     {
+      "id": "frontend_e2e_post_mutation_spec",
+      "label": "post-mutation.spec.js",
+      "file_type": "code",
+      "source_file": "frontend/e2e/post-mutation.spec.js",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_e2e_post_mutation_spec_checked",
+      "label": "checked",
+      "file_type": "code",
+      "source_file": "frontend/e2e/post-mutation.spec.js",
+      "source_location": "L3",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_e2e_post_mutation_spec_owner",
+      "label": "owner",
+      "file_type": "code",
+      "source_file": "frontend/e2e/post-mutation.spec.js",
+      "source_location": "L13",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_e2e_post_mutation_spec_other",
+      "label": "other",
+      "file_type": "code",
+      "source_file": "frontend/e2e/post-mutation.spec.js",
+      "source_location": "L14",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_e2e_post_mutation_spec_admin",
+      "label": "admin",
+      "file_type": "code",
+      "source_file": "frontend/e2e/post-mutation.spec.js",
+      "source_location": "L15",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_e2e_post_mutation_spec_post",
+      "label": "post",
+      "file_type": "code",
+      "source_file": "frontend/e2e/post-mutation.spec.js",
+      "source_location": "L16",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_e2e_post_mutation_spec_seed",
+      "label": "seed()",
+      "file_type": "code",
+      "source_file": "frontend/e2e/post-mutation.spec.js",
+      "source_location": "L18",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
       "id": "frontend_e2e_posts_spec",
       "label": "posts.spec.js",
       "file_type": "code",
@@ -548,7 +605,7 @@
       "label": "authorRole()",
       "file_type": "code",
       "source_file": "frontend/src/components/BlogCard.jsx",
-      "source_location": "L8",
+      "source_location": "L9",
       "_callable": true,
       "_origin": "ast"
     },
@@ -557,7 +614,7 @@
       "label": "postDate()",
       "file_type": "code",
       "source_file": "frontend/src/components/BlogCard.jsx",
-      "source_location": "L15",
+      "source_location": "L16",
       "_callable": true,
       "_origin": "ast"
     },
@@ -566,7 +623,7 @@
       "label": "BlogCard()",
       "file_type": "code",
       "source_file": "frontend/src/components/BlogCard.jsx",
-      "source_location": "L19",
+      "source_location": "L20",
       "_callable": true,
       "_origin": "ast"
     },
@@ -760,7 +817,7 @@
       "label": "snapshot()",
       "file_type": "code",
       "source_file": "frontend/src/pages/ReadBlog.jsx",
-      "source_location": "L9",
+      "source_location": "L10",
       "_callable": true,
       "_origin": "ast"
     },
@@ -769,7 +826,16 @@
       "label": "ReadBlog()",
       "file_type": "code",
       "source_file": "frontend/src/pages/ReadBlog.jsx",
-      "source_location": "L13",
+      "source_location": "L14",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_pages_readblog_readblog_handledelete",
+      "label": "handleDelete()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/ReadBlog.jsx",
+      "source_location": "L28",
       "_callable": true,
       "_origin": "ast"
     },
@@ -814,7 +880,81 @@
       "label": "handleSubmit()",
       "file_type": "code",
       "source_file": "frontend/src/pages/WriteBlog.jsx",
+      "source_location": "L24",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_posts_mutation_test",
+      "label": "posts-mutation.test.jsx",
+      "file_type": "code",
+      "source_file": "frontend/src/posts-mutation.test.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_posts_mutation_test_owner",
+      "label": "owner",
+      "file_type": "code",
+      "source_file": "frontend/src/posts-mutation.test.jsx",
+      "source_location": "L11",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_posts_mutation_test_other",
+      "label": "other",
+      "file_type": "code",
+      "source_file": "frontend/src/posts-mutation.test.jsx",
+      "source_location": "L12",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_posts_mutation_test_admin",
+      "label": "admin",
+      "file_type": "code",
+      "source_file": "frontend/src/posts-mutation.test.jsx",
+      "source_location": "L13",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_posts_mutation_test_post",
+      "label": "post",
+      "file_type": "code",
+      "source_file": "frontend/src/posts-mutation.test.jsx",
       "source_location": "L14",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_posts_mutation_test_another",
+      "label": "another",
+      "file_type": "code",
+      "source_file": "frontend/src/posts-mutation.test.jsx",
+      "source_location": "L15",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_posts_mutation_test_input",
+      "label": "input",
+      "file_type": "code",
+      "source_file": "frontend/src/posts-mutation.test.jsx",
+      "source_location": "L16",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_posts_mutation_test_stored",
+      "label": "stored()",
+      "file_type": "code",
+      "source_file": "frontend/src/posts-mutation.test.jsx",
+      "source_location": "L17",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_posts_mutation_test_mount",
+      "label": "mount()",
+      "file_type": "code",
+      "source_file": "frontend/src/posts-mutation.test.jsx",
+      "source_location": "L18",
       "_callable": true,
       "_origin": "ast"
     },
@@ -1122,6 +1262,42 @@
       "_origin": "ast"
     },
     {
+      "id": "frontend_src_utils_storage_canmutatepost",
+      "label": "canMutatePost()",
+      "file_type": "code",
+      "source_file": "frontend/src/utils/storage.js",
+      "source_location": "L100",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_utils_storage_mutationtarget",
+      "label": "mutationTarget()",
+      "file_type": "code",
+      "source_file": "frontend/src/utils/storage.js",
+      "source_location": "L108",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_utils_storage_updatepost",
+      "label": "updatePost()",
+      "file_type": "code",
+      "source_file": "frontend/src/utils/storage.js",
+      "source_location": "L123",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_utils_storage_deletepost",
+      "label": "deletePost()",
+      "file_type": "code",
+      "source_file": "frontend/src/utils/storage.js",
+      "source_location": "L134",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
       "id": "frontend_tailwind_config",
       "label": "tailwind.config.js",
       "file_type": "code",
@@ -1168,6 +1344,88 @@
       "confidence": "EXTRACTED",
       "source_file": "frontend/e2e/identity.spec.js",
       "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_post_mutation_spec",
+      "target": "ref_playwright_test",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/post-mutation.spec.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_post_mutation_spec",
+      "target": "frontend_e2e_post_mutation_spec_checked",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/post-mutation.spec.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_post_mutation_spec",
+      "target": "frontend_e2e_post_mutation_spec_owner",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/post-mutation.spec.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_post_mutation_spec",
+      "target": "frontend_e2e_post_mutation_spec_other",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/post-mutation.spec.js",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_post_mutation_spec",
+      "target": "frontend_e2e_post_mutation_spec_admin",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/post-mutation.spec.js",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_post_mutation_spec",
+      "target": "frontend_e2e_post_mutation_spec_post",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/post-mutation.spec.js",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_post_mutation_spec",
+      "target": "frontend_e2e_post_mutation_spec_seed",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/post-mutation.spec.js",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_e2e_post_mutation_spec",
+      "target": "frontend_e2e_post_mutation_spec_seed",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/e2e/post-mutation.spec.js",
+      "source_location": "L28",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -1895,7 +2153,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/App.jsx",
-      "source_location": "L65",
+      "source_location": "L66",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2095,11 +2353,33 @@
     },
     {
       "source": "frontend_src_components_blogcard",
+      "target": "frontend_src_utils_storage",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/BlogCard.jsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_components_blogcard",
+      "target": "frontend_src_utils_storage_canmutatepost",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/BlogCard.jsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_components_blogcard",
       "target": "frontend_src_components_blogcard_authorrole",
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/components/BlogCard.jsx",
-      "source_location": "L8",
+      "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2109,7 +2389,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/components/BlogCard.jsx",
-      "source_location": "L15",
+      "source_location": "L16",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2119,7 +2399,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/components/BlogCard.jsx",
-      "source_location": "L19",
+      "source_location": "L20",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2130,7 +2410,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/components/BlogCard.jsx",
-      "source_location": "L23",
+      "source_location": "L24",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3051,7 +3331,7 @@
     },
     {
       "source": "frontend_src_pages_readblog",
-      "target": "frontend_src_utils_storage",
+      "target": "frontend_src_utils_auth",
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -3062,12 +3342,56 @@
     },
     {
       "source": "frontend_src_pages_readblog",
-      "target": "frontend_src_utils_storage_getusers",
+      "target": "frontend_src_utils_auth_getsession",
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/ReadBlog.jsx",
       "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_readblog",
+      "target": "frontend_src_utils_storage",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/ReadBlog.jsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_readblog",
+      "target": "frontend_src_utils_storage_canmutatepost",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/ReadBlog.jsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_readblog",
+      "target": "frontend_src_utils_storage_deletepost",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/ReadBlog.jsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_readblog",
+      "target": "frontend_src_utils_storage_getusers",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/ReadBlog.jsx",
+      "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3078,7 +3402,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/ReadBlog.jsx",
-      "source_location": "L6",
+      "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3089,7 +3413,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/ReadBlog.jsx",
-      "source_location": "L6",
+      "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3100,7 +3424,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/ReadBlog.jsx",
-      "source_location": "L6",
+      "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3110,7 +3434,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/ReadBlog.jsx",
-      "source_location": "L9",
+      "source_location": "L10",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3120,7 +3444,17 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/ReadBlog.jsx",
-      "source_location": "L13",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_readblog_readblog",
+      "target": "frontend_src_pages_readblog_readblog_handledelete",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/ReadBlog.jsx",
+      "source_location": "L28",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3132,7 +3466,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.85,
       "source_file": "frontend/src/pages/ReadBlog.jsx",
-      "source_location": "L15",
+      "source_location": "L17",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3143,7 +3477,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/ReadBlog.jsx",
-      "source_location": "L18",
+      "source_location": "L21",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3247,7 +3581,40 @@
     },
     {
       "source": "frontend_src_pages_writeblog",
+      "target": "frontend_src_utils_storage_canmutatepost",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/WriteBlog.jsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_writeblog",
       "target": "frontend_src_utils_storage_createpost",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/WriteBlog.jsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_writeblog",
+      "target": "frontend_src_utils_storage_readposts",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/WriteBlog.jsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_writeblog",
+      "target": "frontend_src_utils_storage_updatepost",
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -3272,7 +3639,296 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/WriteBlog.jsx",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_posts_mutation_test",
+      "target": "ref_react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/posts-mutation.test.jsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_posts_mutation_test",
+      "target": "ref_vitest",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/posts-mutation.test.jsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_posts_mutation_test",
+      "target": "ref_testing_library_react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/posts-mutation.test.jsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_posts_mutation_test",
+      "target": "ref_testing_library_user_event",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/posts-mutation.test.jsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_posts_mutation_test",
+      "target": "ref_testing_library_jest_dom",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/posts-mutation.test.jsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_posts_mutation_test",
+      "target": "ref_react_router_dom",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/posts-mutation.test.jsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_posts_mutation_test",
+      "target": "frontend_src_app",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/posts-mutation.test.jsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_posts_mutation_test",
+      "target": "frontend_src_utils_auth",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/posts-mutation.test.jsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_posts_mutation_test",
+      "target": "frontend_src_utils_auth_getsession",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/posts-mutation.test.jsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_posts_mutation_test",
+      "target": "frontend_src_utils_auth_setsession",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/posts-mutation.test.jsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_posts_mutation_test",
+      "target": "frontend_src_utils_storage",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/posts-mutation.test.jsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_posts_mutation_test",
+      "target": "frontend_src_utils_storage_canmutatepost",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/posts-mutation.test.jsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_posts_mutation_test",
+      "target": "frontend_src_utils_storage_deletepost",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/posts-mutation.test.jsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_posts_mutation_test",
+      "target": "frontend_src_utils_storage_updatepost",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/posts-mutation.test.jsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_posts_mutation_test",
+      "target": "frontend_src_utils_storage_posts_key",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/posts-mutation.test.jsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_posts_mutation_test",
+      "target": "frontend_src_utils_storage_session_key",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/posts-mutation.test.jsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_posts_mutation_test",
+      "target": "frontend_src_utils_storage_saveposts",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/posts-mutation.test.jsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_posts_mutation_test",
+      "target": "frontend_src_posts_mutation_test_owner",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/posts-mutation.test.jsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_posts_mutation_test",
+      "target": "frontend_src_posts_mutation_test_other",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/posts-mutation.test.jsx",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_posts_mutation_test",
+      "target": "frontend_src_posts_mutation_test_admin",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/posts-mutation.test.jsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_posts_mutation_test",
+      "target": "frontend_src_posts_mutation_test_post",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/posts-mutation.test.jsx",
       "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_posts_mutation_test",
+      "target": "frontend_src_posts_mutation_test_another",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/posts-mutation.test.jsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_posts_mutation_test",
+      "target": "frontend_src_posts_mutation_test_input",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/posts-mutation.test.jsx",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_posts_mutation_test",
+      "target": "frontend_src_posts_mutation_test_stored",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/posts-mutation.test.jsx",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_posts_mutation_test",
+      "target": "frontend_src_posts_mutation_test_mount",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/posts-mutation.test.jsx",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_posts_mutation_test",
+      "target": "frontend_src_posts_mutation_test_stored",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/posts-mutation.test.jsx",
+      "source_location": "L35",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_posts_mutation_test",
+      "target": "frontend_src_posts_mutation_test_mount",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/posts-mutation.test.jsx",
+      "source_location": "L106",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3964,6 +4620,46 @@
       "_origin": "ast"
     },
     {
+      "source": "frontend_src_utils_storage",
+      "target": "frontend_src_utils_storage_canmutatepost",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/utils/storage.js",
+      "source_location": "L100",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_utils_storage",
+      "target": "frontend_src_utils_storage_mutationtarget",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/utils/storage.js",
+      "source_location": "L108",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_utils_storage",
+      "target": "frontend_src_utils_storage_updatepost",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/utils/storage.js",
+      "source_location": "L123",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_utils_storage",
+      "target": "frontend_src_utils_storage_deletepost",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/utils/storage.js",
+      "source_location": "L134",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
       "source": "frontend_src_utils_storage_getcollection",
       "target": "frontend_src_utils_storage_readcollection",
       "relation": "calls",
@@ -4059,6 +4755,83 @@
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/utils/storage.js",
       "source_location": "L95",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_utils_storage_canmutatepost",
+      "target": "frontend_src_utils_storage_validpost",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/utils/storage.js",
+      "source_location": "L104",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_utils_storage_mutationtarget",
+      "target": "frontend_src_utils_storage_readposts",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/utils/storage.js",
+      "source_location": "L114",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_utils_storage_mutationtarget",
+      "target": "frontend_src_utils_storage_canmutatepost",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/utils/storage.js",
+      "source_location": "L118",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_utils_storage_updatepost",
+      "target": "frontend_src_utils_storage_mutationtarget",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/utils/storage.js",
+      "source_location": "L126",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_utils_storage_updatepost",
+      "target": "frontend_src_utils_storage_saveposts",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/utils/storage.js",
+      "source_location": "L129",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_utils_storage_deletepost",
+      "target": "frontend_src_utils_storage_mutationtarget",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/utils/storage.js",
+      "source_location": "L135",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_utils_storage_deletepost",
+      "target": "frontend_src_utils_storage_saveposts",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/utils/storage.js",
+      "source_location": "L140",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4195,6 +4968,17 @@
       "_origin": "ast"
     },
     {
+      "source": "frontend_src_posts_mutation_test",
+      "target": "frontend_src_app_app",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/posts-mutation.test.jsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
       "source": "frontend_src_posts_test",
       "target": "frontend_src_app_app",
       "relation": "imports",
@@ -4272,6 +5056,17 @@
       "_origin": "ast"
     },
     {
+      "source": "frontend_src_components_blogcard_blogcard",
+      "target": "frontend_src_utils_storage_canmutatepost",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/BlogCard.jsx",
+      "source_location": "L33",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
       "source": "frontend_src_components_publicnavbar_publicnavbar",
       "target": "frontend_src_utils_auth_rolehome",
       "relation": "calls",
@@ -4333,7 +5128,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/ReadBlog.jsx",
-      "source_location": "L10",
+      "source_location": "L11",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4344,7 +5139,18 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/ReadBlog.jsx",
-      "source_location": "L10",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_readblog_readblog",
+      "target": "frontend_src_utils_storage_deletepost",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/ReadBlog.jsx",
+      "source_location": "L29",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4355,7 +5161,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/ReadBlog.jsx",
-      "source_location": "L33",
+      "source_location": "L43",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4366,7 +5172,62 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/ReadBlog.jsx",
-      "source_location": "L35",
+      "source_location": "L45",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_readblog_readblog",
+      "target": "frontend_src_utils_storage_canmutatepost",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/ReadBlog.jsx",
+      "source_location": "L48",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_writeblog_writeblog",
+      "target": "frontend_src_utils_storage_readposts",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/WriteBlog.jsx",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_writeblog_writeblog",
+      "target": "frontend_src_utils_storage_canmutatepost",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/WriteBlog.jsx",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_writeblog_writeblog",
+      "target": "frontend_src_utils_auth_getsession",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/WriteBlog.jsx",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_writeblog_writeblog",
+      "target": "frontend_src_utils_storage_updatepost",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/WriteBlog.jsx",
+      "source_location": "L26",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4377,7 +5238,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/pages/WriteBlog.jsx",
-      "source_location": "L16",
+      "source_location": "L26",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4613,7 +5474,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/components/BlogCard.jsx",
-      "source_location": "L29",
+      "source_location": "L30",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4685,7 +5546,31 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/pages/ReadBlog.jsx",
-      "source_location": "L33",
+      "source_location": "L43",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_readblog_readblog_handledelete",
+      "target": "frontend_src_utils_storage_deletepost",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "frontend/src/pages/ReadBlog.jsx",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_readblog_readblog_handledelete",
+      "target": "frontend_src_utils_auth_getsession",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "frontend/src/pages/ReadBlog.jsx",
+      "source_location": "L29",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4703,13 +5588,13 @@
     },
     {
       "source": "frontend_src_pages_writeblog_writeblog_handlesubmit",
-      "target": "frontend_src_utils_storage_createpost",
+      "target": "frontend_src_utils_storage_updatepost",
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/pages/WriteBlog.jsx",
-      "source_location": "L16",
+      "source_location": "L26",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4721,7 +5606,43 @@
       "confidence": "INFERRED",
       "confidence_score": 0.85,
       "source_file": "frontend/src/pages/WriteBlog.jsx",
-      "source_location": "L16",
+      "source_location": "L26",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_pages_writeblog_writeblog_handlesubmit",
+      "target": "frontend_src_utils_storage_createpost",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "frontend/src/pages/WriteBlog.jsx",
+      "source_location": "L26",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_posts_mutation_test_mount",
+      "target": "frontend_src_app_app",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "frontend/src/posts-mutation.test.jsx",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_posts_mutation_test",
+      "target": "frontend_src_utils_auth_getsession",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "frontend/src/posts-mutation.test.jsx",
+      "source_location": "L33",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4751,10 +5672,10 @@
     }
   ],
   "metadata": {
-    "built_at": "2026-11-24T10:50:23.056323+00:00",
+    "built_at": "2026-11-24T10:52:33.566841+00:00",
     "version": "graph_update-v1",
     "codebase_root": "/var/lib/sel-nexus/artifacts-v2/T98digiai0000466124112610260174/developer",
     "force": true,
-    "files_scanned": 27
+    "files_scanned": 29
   }
 }
