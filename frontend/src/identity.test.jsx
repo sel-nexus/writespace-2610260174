@@ -126,7 +126,7 @@ describe('pages and routing', () => {
     await user.type(screen.getByLabelText('Password', { exact: true }), 'demo');
     await user.type(screen.getByLabelText('Confirm Password'), 'demo');
     await user.click(screen.getByRole('button', { name: 'Register' }));
-    expect(screen.getByText('Page not available')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'All Blogs' })).toBeInTheDocument();
     cleanup(); mount('/blogs');
     await user.click(screen.getByRole('button', { name: /Lee/ }));
     await user.click(screen.getByRole('button', { name: 'Logout' }));

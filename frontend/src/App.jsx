@@ -7,6 +7,9 @@ import { ProtectedRoute } from './components/ProtectedRoute';
 import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import Home from './pages/Home';
+import ReadBlog from './pages/ReadBlog';
+import WriteBlog from './pages/WriteBlog';
 import { getSession, logout, roleHome } from './utils/auth';
 import { SESSION_KEY } from './utils/storage';
 
@@ -46,7 +49,7 @@ export default function App() {
   }
   const publicNav = location.pathname === '/' || !session;
   const authPage = (page) => session ? <Navigate to={roleHome(session)} replace /> : page;
-  const protectedPage = (adminOnly = false) => signedOut && !session ? <Navigate to="/" replace /> : <ProtectedRoute session={session} adminOnly={adminOnly}><Unavailable /></ProtectedRoute>;
+  const protectedPage = (page, adminOnly = false) => signedOut && !session ? <Navigate to="/" replace /> : <ProtectedRoute session={session} adminOnly={adminOnly}>{page}</ProtectedRoute>;
   const acceptSession = (value) => { setSignedOut(false); setSession(value); };
   return (
     <div className="min-h-screen bg-white text-slate-900">
@@ -56,12 +59,12 @@ export default function App() {
         <Route path="/" element={<LandingPage session={session} />} />
         <Route path="/login" element={authPage(<LoginPage onSessionChange={acceptSession} />)} />
         <Route path="/register" element={authPage(<RegisterPage onSessionChange={acceptSession} />)} />
-        <Route path="/blogs" element={protectedPage()} />
-        <Route path="/blog/:id" element={protectedPage()} />
-        <Route path="/write" element={protectedPage()} />
-        <Route path="/edit/:id" element={protectedPage()} />
-        <Route path="/admin" element={protectedPage(true)} />
-        <Route path="/users" element={protectedPage(true)} />
+        <Route path="/blogs" element={protectedPage(<Home />)} />
+        <Route path="/blog/:id" element={protectedPage(<ReadBlog />)} />
+        <Route path="/write" element={protectedPage(<WriteBlog />)} />
+        <Route path="/edit/:id" element={protectedPage(<Unavailable />)} />
+        <Route path="/admin" element={protectedPage(<Unavailable />, true)} />
+        <Route path="/users" element={protectedPage(<Unavailable />, true)} />
         <Route path="*" element={<Unavailable />} />
       </Routes>
     </div>
